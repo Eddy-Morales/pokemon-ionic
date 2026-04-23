@@ -10,6 +10,7 @@ Entregable: en el aula virtual deberá subir su repositorio de github donde debe
 
 ----
 ionic start pokeapp blank --type=angular
+
 cd pokeapp
 
 npm install @angular/common @angular/http, puede que deba usar --force

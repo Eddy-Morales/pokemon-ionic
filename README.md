@@ -1,21 +1,17 @@
 # Laboratorio 
 # Consumo de API's con ionic
 
-El presente repo contiene una aplicación que consume el API de https://pokeapi.co/, con el endpoint [https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0](https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0)
+busqueda de pokemons:
 
-La actividad por realizar es generar una aplicación que me permita buscar y mostrar Pokémons pero con todas sus características, incluida su foto, para lo cual puede consumir el endpoint: https://pokeapi.co/api/v2/pokemon/ditto , en este caso "ditto" es el nombre del Pokémon a mostrar.
+<img width="570" height="771" alt="image" src="https://github.com/user-attachments/assets/a7df5be1-4f95-4e0f-91ed-b8d5f4f43386" />
 
-Entregable: en el aula virtual deberá subir su repositorio de github donde debe detallar el proceso en el readme y adjuntar capturas de la app en ejecución. Pueden trabajar hasta 3 personas. Todos deben subir su repositorio.
+<img width="572" height="810" alt="image" src="https://github.com/user-attachments/assets/e6c509dd-86f5-4dc5-8b98-eecef24cd17d" />
+
+<img width="562" height="753" alt="image" src="https://github.com/user-attachments/assets/6c4618a0-544f-4a17-8198-5f20372b216f" />
+
+<img width="570" height="736" alt="image" src="https://github.com/user-attachments/assets/17cbb1a9-e793-48e2-9289-8b96e7cf8d44" />
 
 
-----
-ionic start pokeapp blank --type=angular
 
-cd pokeapp
 
-npm install @angular/common @angular/http, puede que deba usar --force
-
-ionic generate service services/pokemon
-
-ionic generate page pages/pokemon-list
 

@@ -1,3 +1,62 @@
+<style>
+  .pokemon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.center-text {
+  text-align: center;
+  width: 100%;
+}
+
+.center-img {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+ion-card {
+  width: 550px;
+  max-width: 90vw;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin-bottom: 24px;
+}
+
+ion-card-title {
+  font-size: 2rem;
+  color: #e3350d;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #333;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+
+img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 2px solid #e3350d;
+}
+
+</style>
+
 <ion-header>
   <ion-toolbar>
     <ion-title>Pokémon List</ion-title>
@@ -5,14 +64,47 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let pokemon of pokemons">
-      <ion-label>{{ pokemon.name | titlecase }}</ion-label>
-      <a href="{{ pokemon.url}}"><ion-label>{{ pokemon.url}}</ion-label></a>
-      
-    </ion-item>
-  
-  </ion-list>
+  <!-- Buscador de Pokémon -->
+  <ion-item>
+    <ion-input [(ngModel)]="searchName" placeholder="Nombre o ID del Pokémon"></ion-input>
+    <ion-button (click)="searchPokemon()">Buscar</ion-button>
+  </ion-item>
+
+  <ion-text color="danger" *ngIf="error" class="center-text">{{ error }}</ion-text>
+
+  <!-- Detalles del Pokémon buscado -->
+  <div *ngIf="pokemon" class="pokemon-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="center-text">{{ pokemon.name | titlecase }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="center-img">
+          <img [src]="pokemon.sprites.front_default" alt="Foto de {{ pokemon.name }}">
+        </div>
+        <ion-list>
+          <ion-item><strong>ID:</strong>&nbsp;{{ pokemon.id }}</ion-item>
+          <ion-item><strong>Altura:</strong>&nbsp;{{ pokemon.height }}</ion-item>
+          <ion-item><strong>Peso:</strong>&nbsp;{{ pokemon.weight }}</ion-item>
+          <ion-item><strong>Tipos:</strong>&nbsp;{{ getPokemonTypes(pokemon) }}</ion-item>
+          <ion-item><strong>Habilidades:</strong>&nbsp;{{ getPokemonAbilities(pokemon) }}</ion-item>
+          <ion-item><strong>Experiencia base:</strong>&nbsp;{{ pokemon.base_experience }}</ion-item>
+          <ion-item><strong>Orden:</strong>&nbsp;{{ pokemon.order }}</ion-item>
+          <ion-item><strong>Stats:</strong>&nbsp;{{ getPokemonStats(pokemon) }}</ion-item>
+          <ion-item><strong>Especie:</strong>&nbsp;{{ getPokemonSpecies(pokemon) }}</ion-item>
+          <ion-item><strong>Primer movimiento:</strong>&nbsp;{{ pokemon.moves[0]?.move?.name }}</ion-item>
+          <ion-item><strong>Total de movimientos:</strong>&nbsp;{{ pokemon.moves.length }}</ion-item>
+          <ion-item><strong>Primer juego:</strong>&nbsp;{{ pokemon.game_indices[0]?.version?.name }}</ion-item>
+          <ion-item><strong>¿Es default?:</strong>&nbsp;{{ pokemon.is_default ? 'Sí' : 'No' }}</ion-item>
+          <ion-item><strong>Nombre de la forma:</strong>&nbsp;{{ pokemon.forms[0]?.name }}</ion-item>
+          <ion-item class="img2">
+            <strong>Imagen shiny:</strong>
+            <img [src]="pokemon.sprites.front_shiny" alt="Shiny" *ngIf="pokemon.sprites.front_shiny" style="margin-left:10px; width:100px; vertical-align:middle;">
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
   <ion-spinner *ngIf="loading" class="loading-spinner"></ion-spinner>
 </ion-content>
